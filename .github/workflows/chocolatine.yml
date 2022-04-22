@@ -1,0 +1,36 @@
+name: Chocolatine
+
+on: 
+  push:
+    branches-ignore:
+    - "ga-ignore -*"
+  pull_request:
+    branches-ignore:
+    - "ga-ignore -*"
+
+jobs:
+   check_repository_cleanliness:
+      build:
+      runs-on: ubuntu-latest
+       steps:
+      - uses: actions/checkout@v3
+      - name: check_repository_cleanliness
+        run: 
+          mara = $( find . -type f \( -name ".o" -o -name "*~* -o -name "*.a" -o -name "*.gcno" -o -name "*.gcda* -o -name "*gcov* -o \
+          -name "tmp" \) )
+          check_program_compilation:
+              runs-on: epitechcontent/epitest-docker
+               steps:
+               - uses: actions/checkout@v3
+               - name: check_program_compilation
+                  run: make
+                  run: make clean
+           run_tests:
+            runs-on: epitechcontent/epitest-docker
+             steps:
+             - name: run_tests
+           run: make run_tests
+      - name: Run a multi-line script
+        run:
+          echo Add other actions to build,
+          echo test, and deploy your project.
